@@ -165,6 +165,50 @@
             border-radius: 20px;
         }
 
+        .video-placeholder {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, #1a1a40, #2d2d5f);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .video-placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .video-placeholder-text {
+            font-size: 1.2rem;
+            color: #b8b8d1;
+            text-align: center;
+            max-width: 400px;
+            line-height: 1.5;
+        }
+
+        .video-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .video-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+        }
+
         .cta-section {
             text-align: center;
             padding: 50px 0;
@@ -251,6 +295,7 @@
             .intro-grid { grid-template-columns: 1fr; gap: 20px; }
             .content-section { padding: 25px; }
             .video-frame { height: 250px; }
+            .video-placeholder { height: 250px; }
             .telegram-btn { padding: 15px 30px; font-size: 1.1rem; }
         }
     </style>
@@ -313,11 +358,19 @@
 
         <section class="video-section">
             <div class="video-container">
-                <iframe 
-                    class="video-frame"
-                    src="https://rutube.ru/video/382eaa3741148ad2b8072332cad82a6f/"
-                    allowfullscreen>
-                </iframe>
+                <!-- Заменил iframe на плейсхолдер с кнопкой для перехода на Rutube -->
+                <div class="video-placeholder">
+                    <div class="video-placeholder-icon">🎥</div>
+                    <p class="video-placeholder-text">
+                        Видеоурок доступен на Rutube.<br>
+                        Нажмите кнопку ниже для просмотра.
+                    </p>
+                    <a href="https://rutube.ru/video/382eaa3741148ad2b8072332cad82a6f/" 
+                       target="_blank" 
+                       class="video-link">
+                        Смотреть видео на Rutube
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -376,6 +429,18 @@
                     behavior: 'smooth'
                 });
             });
+
+            // Анимация для кнопки видео
+            const videoLink = document.querySelector('.video-link');
+            if (videoLink) {
+                videoLink.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px) scale(1.05)';
+                });
+                
+                videoLink.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            }
         });
     </script>
 </body>
