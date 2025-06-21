@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>День 3: Автоматизация процесса | Стартер продукта</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a40 50%, #2d2d5f 100%);
+            color: white;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+        }
+
+        .day-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(255, 107, 107, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00d4ff, #90ff90, #ffeb3b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #b8b8d1;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .intro-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            border-radius: 15px 15px 0 0;
+        }
+
+        .intro-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+
+        .icon-what { background: linear-gradient(45deg, #ff6b6b, #ff8e8e); }
+        .icon-why { background: linear-gradient(45deg, #4ecdc4, #7ed6cc); }
+        .icon-without { background: linear-gradient(45deg, #ffa500, #ffb347); }
+        .icon-result { background: linear-gradient(45deg, #90ff90, #a8ff90); }
+
+        .card-text {
+            color: #d1d1e0;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .video-section {
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            background: #000;
+        }
+
+        .video-frame {
+            width: 100%;
+            height: 450px;
+            border: none;
+            border-radius: 20px;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .telegram-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #0088cc, #00a6fb);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 136, 204, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .telegram-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 136, 204, 0.6);
+        }
+
+        .telegram-btn::before {
+            content: '📱';
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .homework-section {
+            background: linear-gradient(135deg, rgba(144, 255, 144, 0.1), rgba(144, 255, 144, 0.05));
+            border: 2px solid rgba(144, 255, 144, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .homework-title {
+            font-size: 1.5rem;
+            color: #90ff90;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .homework-text {
+            color: #d1d1e0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-crypto {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .crypto-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .crypto-2 { top: 20%; right: 15%; animation-delay: 1s; }
+        .crypto-3 { bottom: 30%; left: 20%; animation-delay: 2s; }
+        .crypto-4 { bottom: 20%; right: 10%; animation-delay: 3s; }
+
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            h1 { font-size: 2.5rem; }
+            .intro-grid { grid-template-columns: 1fr; gap: 20px; }
+            .content-section { padding: 25px; }
+            .video-frame { height: 250px; }
+            .telegram-btn { padding: 15px 30px; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-crypto crypto-1">₿</div>
+        <div class="floating-crypto crypto-2">Ξ</div>
+        <div class="floating-crypto crypto-3">⚡</div>
+        <div class="floating-crypto crypto-4">🚀</div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="day-badge">ДЕНЬ 3</div>
+            <h1>АВТОМАТИЗАЦИЯ ПРОЦЕССА</h1>
+            <p class="subtitle">Настройте систему так, чтобы она работала без вашего участия</p>
+        </header>
+
+        <section class="content-section">
+            <div class="intro-grid">
+                <div class="intro-card">
+                    <div class="card-title">
+                        <div class="card-icon icon-what"></div>
+                        Что делаем
+                    </div>
+                    <p class="card-text">Настраиваем систему так, чтобы она работала без вашего участия.</p>
+                </div>
+
+                <div class="intro-card">
+                    <div class="card-title">
+                        <div class="card-icon icon-why"></div>
+                        Зачем это нужно
+                    </div>
+                    <p class="card-text">Вы же не хотите сидеть у компьютера 24 часа в сутки? Вы хотите, чтобы система работала, пока вы живете своей жизнью, проводите время с семьей, отдыхаете.</p>
+                </div>
+
+                <div class="intro-card">
+                    <div class="card-title">
+                        <div class="card-icon icon-without"></div>
+                        Почему без этого не получится
+                    </div>
+                    <p class="card-text">Эмоции - главный враг трейдера. Как только вы начинаете думать "а вдруг еще подрастет" или "надо срочно продавать", вы теряете деньги. Автоматизация исключает эмоции.</p>
+                </div>
+
+                <div class="intro-card">
+                    <div class="card-title">
+                        <div class="card-icon icon-result"></div>
+                        Что вы получите
+                    </div>
+                    <p class="card-text">Пошаговую инструкцию, как настроить автоматическую торговлю за 2 дня. Полностью бесплатно, без платных сервисов. Я покажу свой пример с системой, которая работает уже месяцы.</p>
+                </div>
+            </div>
+
+            <div class="result-highlight" style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 212, 255, 0.05)); border: 2px solid rgba(0, 212, 255, 0.3); border-radius: 15px; padding: 30px; margin-top: 30px;">
+                <h3 style="color: #00d4ff; font-size: 1.4rem; margin-bottom: 15px; font-weight: 700;">🎯 Вы увидите:</h3>
+                <p style="color: #d1d1e0; font-size: 1.1rem; line-height: 1.7;">Что сделать, чтобы система сама покупает и продает по вашим стратегиям, пока вы спите. Она работает строго по плану, без эмоций и отклонений.</p>
+            </div>
+        </section>
+
+        <section class="video-section">
+            <div class="video-container">
+                <iframe 
+                    class="video-frame"
+                    src="https://rutube.ru/video/private/382eaa3741148ad2b8072332cad82a6f/?p=9SxjKh3hzLXcnYnFq5Mr9A"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <a href="https://t.me/Vinograd888" class="telegram-btn" target="_blank">
+                Связаться со мной в Telegram
+            </a>
+        </section>
+
+        <section class="homework-section">
+            <h3 class="homework-title">📝 Домашнее задание</h3>
+            <p class="homework-text">
+                Напишите мне, что всё в порядке, готовы двигаться дальше, и я пришлю вам материалы 4-го дня!
+            </p>
+        </section>
+    </div>
+
+    <script>
+        // Добавляем интерактивности
+        document.addEventListener('DOMContentLoaded', function() {
+            // Анимация появления карточек
+            const cards = document.querySelectorAll('.intro-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    }
+                });
+            });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Эффект для кнопки Telegram
+            const telegramBtn = document.querySelector('.telegram-btn');
+            telegramBtn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+            
+            telegramBtn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+
+            // Плавная прокрутка к видео при клике на заголовок
+            const header = document.querySelector('h1');
+            header.style.cursor = 'pointer';
+            header.addEventListener('click', function() {
+                document.querySelector('.video-section').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
